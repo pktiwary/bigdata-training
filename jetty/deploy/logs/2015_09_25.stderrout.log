@@ -1,0 +1,8 @@
+2015-09-25 11:18:30.870:INFO:oejs.Server:main: jetty-9.3.3.v20150827
+2015-09-25 11:18:30.946:INFO:oejdp.ScanningAppProvider:main: Deployment monitor [file:///home/pankaj/sandbox/bigdata-training/jetty/deploy/webapps/] at interval 1
+2015-09-25 11:18:31.196:WARN:oeja.AnnotationConfiguration:main: ServletContainerInitializers: detected. Class hierarchy: empty
+2015-09-25 11:18:31.352:INFO:oejsh.ContextHandler:main: Started o.e.j.w.WebAppContext@7f560810{/jetty,file:///tmp/jetty-0.0.0.0-8080-jetty.war-_jetty-any-5276772047293052381.dir/webapp/,AVAILABLE}{/jetty.war}
+2015-09-25 11:18:31.410:INFO:oejs.ServerConnector:main: Started ServerConnector@74ad1f1f{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2015-09-25 11:18:31.410:INFO:oejs.Server:main: Started @2434ms
+2015-09-25 11:18:44.245:INFO:oejs.ServerConnector:Thread-1: Stopped ServerConnector@74ad1f1f{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2015-09-25 11:18:44.275:INFO:oejsh.ContextHandler:Thread-1: Stopped o.e.j.w.WebAppContext@7f560810{/jetty,null,UNAVAILABLE}{/jetty.war}
