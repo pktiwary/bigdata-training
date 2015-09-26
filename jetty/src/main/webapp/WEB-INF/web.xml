@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>Servlet1</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>HBaseServlet</servlet-name>
+  	<display-name>HBaseServlet</display-name>
+  	<description>Servlet providing web based interface to HBase</description>
+  	<servlet-class>demo.hbase.HBaseServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Servlet1</servlet-name>
   	<url-pattern>/Servlet1</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>HBaseServlet</servlet-name>
+  	<url-pattern>/HBaseServlet</url-pattern>
   </servlet-mapping>
 </web-app>

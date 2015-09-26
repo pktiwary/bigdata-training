@@ -24,6 +24,11 @@
 	<artifactId>maven-clean-plugin</artifactId>
 	<version>2.5</version>
     </dependency>
+    <dependency>
+    	<groupId>demo.hbase</groupId>
+    	<artifactId>HBaseLib</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>jetty</finalName>
