@@ -16,6 +16,7 @@ public class App
         newCol.put("last".getBytes(), "Munshi".getBytes());
         ht.put("8".getBytes(), "cf".getBytes(), newCol);
         
+        System.out.println("Testing values based on rowkeys");
         ArrayList<byte[]> rowKeys = new ArrayList<byte[]>();
         rowKeys.add("1".getBytes());
         rowKeys.add("2".getBytes());
@@ -33,10 +34,20 @@ public class App
         for(byte[] rowKey: rowKeys) {
 	        HashMap<byte[], byte[]> values = ht.get(rowKey, "cf".getBytes(), columns);
 	        for(Map.Entry<byte[], byte[]> entry : values.entrySet()) {
-	        	System.out.println(new String(rowKey, "UTF-8") + " => " +
+	        	System.out.println(new String(rowKey, "UTF-8") + " =>" +
 	        			new String(entry.getKey(), "UTF-8") + " : " +
 	        			new String(entry.getValue(), "UTF-8"));
 	        }
         }
+        
+        System.out.println("Testing scan of table");
+        ArrayList<String[]> rows = ht.scan("cf".getBytes(), columns);
+        for(String[] row: rows) {
+        	for(String col: row) {
+        	    System.out.print(col + ",");
+        	}
+        	System.out.println("");
+        }
+        ht.close();
     }
 }

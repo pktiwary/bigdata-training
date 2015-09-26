@@ -15,6 +15,8 @@ import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 
 public class HBaseTable {
@@ -50,4 +52,29 @@ public class HBaseTable {
 		table.put(put);
 	}
 
+	public ArrayList<String[]> scan(byte[] columnFamily, ArrayList<byte[]> columns) throws IOException
+	{
+		Scan scan = new Scan();
+		for(byte[] col: columns) {
+		    scan.addColumn(columnFamily, col);
+		}
+		ArrayList<String[]> retval = new ArrayList<String[]>();
+		ResultScanner scanner = table.getScanner(scan);
+		for (Result result = scanner.next(); result != null; result = scanner.next())
+		{
+			int i = 0;
+			String[] attr = new String[columns.size() + 1];
+			attr[i++] = new String(result.getRow(), "UTF-8");
+			for(byte[] col: columns) {
+			    attr[i++] = new String(result.getValue(columnFamily, col), "UTF-8");
+			}
+			retval.add(attr);
+		}
+		scanner.close();
+		return retval;
+	}
+	
+	public void close() throws IOException {
+		table.close();
+	}
 }
