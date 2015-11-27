@@ -28,13 +28,7 @@ public class HBaseServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		QueryHBaseTable hbase = new QueryHBaseTable();
-		ArrayList<String[]> result = hbase.query(request.getParameter("hbaseTableName"),
-				request.getParameter("columnFamily"),
-				request.getParameter("columns").split(","));
-		request.setAttribute("result", result);
-		RequestDispatcher view = request.getRequestDispatcher("result.jsp");
-		view.forward(request,  response);
+        doPost(request, response);
 	}
 
 	/**
@@ -42,6 +36,23 @@ public class HBaseServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(request.getParameter("action").equals("Query"))
+		{
+		    QueryHBaseTable hbase = new QueryHBaseTable();
+		    ArrayList<String[]> result = hbase.query(request.getParameter("hbaseTableName"),
+			    	request.getParameter("columnFamily"),
+			    	request.getParameter("columns").split(","));
+		    request.setAttribute("result", result);
+		}
+		else if(request.getParameter("action").equals("Create"))
+		{
+			AdminHBaseTable hbase = new AdminHBaseTable();
+			hbase.create(request.getParameter("hbaseTableName"),
+					request.getParameter("columnFamily"));
+			request.setAttribute("message", "Table created successfully");
+		}
+		RequestDispatcher view = request.getRequestDispatcher("result.jsp");
+	    view.forward(request,  response);
 	}
 
 }

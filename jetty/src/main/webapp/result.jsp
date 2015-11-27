@@ -4,10 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>HBase Demo</title>
 </head>
 <body>
-
+<h4>
+<%
+out.println(request.getAttribute("message"));
+%>
+</h4>
 <h1>HBase Access</h1>
 <form method="get" action="HBaseServlet">
 <%
@@ -15,23 +19,25 @@ out.println("HBase Table<input type=\"text\" name=\"hbaseTableName\" value=\"" +
 out.println("Column family<input type=\"text\" name=\"columnFamily\" value=\"" + request.getParameter("columnFamily") + "\">");
 out.println("Columns (comma separated)<input type=\"text\" name=\"columns\" value=\"" + request.getParameter("columns") + "\">");
 %>
-<input type="SUBMIT">
+<input type="submit" name="action" value="Query">
+<input type="submit" name="action" value="Create">
 <p>
 <%
-out.println("<center>" + ((ArrayList<String[]>)request.getAttribute("result")).size() + " results found</center>");
-%>
-<table>
-<%
-ArrayList<String[]> result = (ArrayList<String[]>) request.getAttribute("result");
-for(String[] columns: result) {
-  out.println("<tr>");
-  for(String column: columns) {
+if(request.getParameter("action").equals("Query")) {
+  out.println("<center>" + ((ArrayList<String[]>)request.getAttribute("result")).size() + " results found</center>");
+  out.println("<table border='1'>");
+
+  ArrayList<String[]> result = (ArrayList<String[]>) request.getAttribute("result");
+  for(String[] columns: result) {
+    out.println("<tr>");
+    for(String column: columns) {
 	  out.println("<td>" + column + "</td>");
+    }
+    out.println("</tr>");
   }
-  out.println("</tr>");
+  out.println("</table>");
 }
 %>
-</table>
 </form>
 
 </body>

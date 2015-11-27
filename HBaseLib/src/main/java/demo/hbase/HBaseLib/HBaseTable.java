@@ -9,10 +9,15 @@ import java.util.concurrent.Executors;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.MasterNotRunningException;
 import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.ZooKeeperConnectionException;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Get;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
@@ -72,6 +77,17 @@ public class HBaseTable {
 		}
 		scanner.close();
 		return retval;
+	}
+	
+	public static void create(byte[] tableName, byte[] columnFamily) throws MasterNotRunningException, ZooKeeperConnectionException, IOException
+	{
+		Configuration config = HBaseConfiguration.create();
+		HBaseAdmin admin = new HBaseAdmin(config);
+		HTableDescriptor tableDescriptor = new HTableDescriptor(tableName);
+		HColumnDescriptor family = new HColumnDescriptor(columnFamily);
+		tableDescriptor.addFamily(family);
+		admin.createTable(tableDescriptor);
+		return;
 	}
 	
 	public void close() throws IOException {
