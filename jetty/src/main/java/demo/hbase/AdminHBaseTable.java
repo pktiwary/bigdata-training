@@ -13,6 +13,7 @@ public class AdminHBaseTable {
 	
 	public void create(String hbaseTableName, String columnFamily) throws MasterNotRunningException, ZooKeeperConnectionException, IOException
 	{
+		logger.info("AdminHBaseTable::create called with hbaseTableName: " + hbaseTableName + " and columnFamily: " + columnFamily); 
 		HBaseTable.create(hbaseTableName.getBytes(), columnFamily.getBytes());
 	}
 }

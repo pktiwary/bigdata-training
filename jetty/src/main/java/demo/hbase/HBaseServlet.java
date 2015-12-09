@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 /**
  * Servlet implementation class HBaseServlet
  */
 public class HBaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	final static Logger logger = Logger.getLogger(HBaseServlet.class);
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,7 +40,7 @@ public class HBaseServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		if(request.getParameter("action").equals("Query"))
 		{
-		    QueryHBaseTable hbase = new QueryHBaseTable();
+			QueryHBaseTable hbase = new QueryHBaseTable();
 		    ArrayList<String[]> result = hbase.query(request.getParameter("hbaseTableName"),
 			    	request.getParameter("columnFamily"),
 			    	request.getParameter("columns").split(","));

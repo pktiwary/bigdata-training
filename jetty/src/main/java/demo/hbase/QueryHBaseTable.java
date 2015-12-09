@@ -17,7 +17,7 @@ public class QueryHBaseTable {
     	ArrayList<String[]> res = null;
     	try {
     		client = new HBaseTable(hbaseTableName);
-		    logger.info("init successful");
+		    logger.info("HBaseTable init successful for table: " + hbaseTableName);
 		    ArrayList<byte[]> columns = new ArrayList<byte[]>();
 		    for(String col: inputColumns) {
 		        columns.add(col.getBytes());
